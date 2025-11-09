@@ -44,10 +44,10 @@ ctest --output-on-failure
 ## Development
 
 Targets:
-- `ingestion_lib`: opinion ingestion logic (`opinion.h` / `opinion.cpp`, plus header-only helpers like `hello.h`).
+- `ingestion_lib`: opinion ingestion logic (`opinion.h` / `opinion.cpp`).
 - `ingestion_app`: CLI demo reading up to the first N (default 100) valid opinion rows.
 - `ingestion_tests`: Custom minimal unit test harness (no third-party frameworks).
-- `calculator_example`: Simple usage of `hello` and `add` helpers.
+- `calculator_example`: Minimal `OpinionReader` example printing a few parsed rows.
 
 Key features of the CSV parser (`OpinionReader`):
 - Dynamically maps columns by header names (order-independent).

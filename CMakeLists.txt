@@ -28,8 +28,17 @@ target_link_libraries(ingestion_app PRIVATE ingestion_lib)
 # Enable testing
 enable_testing()
 
-# Add GoogleTest
-add_subdirectory(third_party/googletest)
+# GoogleTest via FetchContent instead of submodule
+include(FetchContent)
+set(GTEST_VERSION 1.14.0)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v${GTEST_VERSION}.zip
+    URL_HASH SHA256=94a9f9a23474131a681a4bf63eecf97f5673d433b89adef4234dc688f71d7b47
+)
+set(BUILD_GMOCK OFF CACHE BOOL "Disable gmock" FORCE)
+set(INSTALL_GTEST OFF CACHE BOOL "Disable install" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 # Tests executable
 add_executable(ingestion_tests
@@ -39,8 +48,8 @@ add_executable(ingestion_tests
 target_link_libraries(ingestion_tests
     PRIVATE
         ingestion_lib
-        gtest
-        gtest_main
+        GTest::gtest
+        GTest::gtest_main
 )
 
 # Register tests

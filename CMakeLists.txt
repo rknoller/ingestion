@@ -27,29 +27,11 @@ target_link_libraries(ingestion_app PRIVATE ingestion_lib)
 # Enable testing
 enable_testing()
 
-# GoogleTest via FetchContent instead of submodule
-include(FetchContent)
-set(GTEST_VERSION 1.14.0)
-FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v${GTEST_VERSION}
-    GIT_SHALLOW TRUE
-)
-set(BUILD_GMOCK OFF CACHE BOOL "Disable gmock" FORCE)
-set(INSTALL_GTEST OFF CACHE BOOL "Disable install" FORCE)
-FetchContent_MakeAvailable(googletest)
-
-# Tests executable
+# Tests executable (custom lightweight test harness - no external frameworks)
 add_executable(ingestion_tests
     tests/opinion_test.cpp
 )
-target_link_libraries(ingestion_tests
-    PRIVATE
-        ingestion_lib
-        GTest::gtest
-        GTest::gtest_main
-)
+target_link_libraries(ingestion_tests PRIVATE ingestion_lib)
 
 # Register tests
 add_test(NAME unit_tests COMMAND ingestion_tests)

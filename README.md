@@ -6,7 +6,7 @@ It showcases:
 - Header-driven CSV parsing with robust handling of quoted fields, escaped quotes, and multi-line records.
 - Safe conversion of integers and booleans with sensible defaults; optional fields via `std::optional`.
 - Clean separation between a reusable library (`ingestion_lib`) and executables (`ingestion_app`, examples).
-- GoogleTest fetched dynamically via CMake `FetchContent` (no vendored source tree clutter).
+- Lightweight custom test harness (no external testing frameworks or Google dependencies).
 - Ready-to-debug VS Code setup (build, run, test tasks + `launch.json`).
 
 ## Project Structure
@@ -17,7 +17,7 @@ It showcases:
 ├── src/             # Library implementation
 ├── examples/        # Example programs
 ├── tests/           # Unit tests
-└── third_party/     # (May be empty; GoogleTest fetched at configure time into build tree)
+└── third_party/     # (Currently unused)
 ```
 
 ## Building
@@ -46,7 +46,7 @@ ctest --output-on-failure
 Targets:
 - `ingestion_lib`: opinion ingestion logic (`opinion.h` / `opinion.cpp`, plus header-only helpers like `hello.h`).
 - `ingestion_app`: CLI demo reading up to the first N (default 100) valid opinion rows.
-- `ingestion_tests`: GoogleTest-based unit tests.
+- `ingestion_tests`: Custom minimal unit test harness (no third-party frameworks).
 - `calculator_example`: Simple usage of `hello` and `add` helpers.
 
 Key features of the CSV parser (`OpinionReader`):
@@ -61,7 +61,7 @@ Extending Parsing:
 
 ## Testing
 
-Tests use GoogleTest fetched via CMake `FetchContent` (git tag `v1.14.0`). No need for submodules.
+The project uses a tiny self-contained test harness (see `tests/opinion_test.cpp`). Assertions are implemented with simple macros; failures print file, line, and expression.
 
 Run tests:
 ```bash
@@ -69,12 +69,15 @@ cd build
 ctest --output-on-failure
 ```
 
-Direct invocation:
+Or invoke directly:
 ```bash
 ./ingestion_tests
 ```
 
-Add new tests by editing files in `tests/` and re-running the build—CMake auto-detects added sources if listed in `CMakeLists.txt`.
+Adding Tests:
+1. Add new `Test_*` functions to `tests/opinion_test.cpp` (or create another file and list it in `CMakeLists.txt`).
+2. Call your new function from `main()` inside the test file.
+3. Rebuild; CTest will rerun the executable.
 
 ## Debugging (VS Code)
 

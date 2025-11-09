@@ -1,6 +1,10 @@
 #pragma once
-
 #include <string>
 
-std::string hello(const std::string& name);
-int add(int a, int b);
+inline std::string hello(const std::string& name) {
+    return "Hello, " + name + "!";
+}
+
+inline int add(int a, int b) {
+    return a + b;
+}

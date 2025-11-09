@@ -11,7 +11,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 # Library target
 add_library(ingestion_lib
-    src/hello.cpp
     src/opinion.cpp
 )
 target_include_directories(ingestion_lib 
@@ -33,8 +32,9 @@ include(FetchContent)
 set(GTEST_VERSION 1.14.0)
 FetchContent_Declare(
     googletest
-    URL https://github.com/google/googletest/archive/refs/tags/v${GTEST_VERSION}.zip
-    URL_HASH SHA256=94a9f9a23474131a681a4bf63eecf97f5673d433b89adef4234dc688f71d7b47
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG v${GTEST_VERSION}
+    GIT_SHALLOW TRUE
 )
 set(BUILD_GMOCK OFF CACHE BOOL "Disable gmock" FORCE)
 set(INSTALL_GTEST OFF CACHE BOOL "Disable install" FORCE)
@@ -42,7 +42,6 @@ FetchContent_MakeAvailable(googletest)
 
 # Tests executable
 add_executable(ingestion_tests
-    tests/hello_test.cpp
     tests/opinion_test.cpp
 )
 target_link_libraries(ingestion_tests

@@ -2,15 +2,13 @@
 #include <vector>
 #include <string>
 #include <exception>
-#include "hello.h"
+#include <optional>
 #include "opinion.h"
 
 int main(int argc, char** argv) {
-    std::cout << hello("World") << "\n";
-    std::cout << "2 + 3 = " << add(2, 3) << "\n";
 
     if (argc < 2) {
-        std::cout << "(Pass path to opinions CSV as first argument to read first 100 lines)\n";
+        std::cout << "Usage: ingestion_app <opinions.csv>\n";
         return 0;
     }
     std::string csvPath = argv[1];

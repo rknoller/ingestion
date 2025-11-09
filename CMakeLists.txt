@@ -5,9 +5,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Enable debug symbols
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+
 # Library target
 add_library(ingestion_lib
     src/hello.cpp
+    src/opinion.cpp
 )
 target_include_directories(ingestion_lib 
     PUBLIC 
@@ -29,6 +34,7 @@ add_subdirectory(third_party/googletest)
 # Tests executable
 add_executable(ingestion_tests
     tests/hello_test.cpp
+    tests/opinion_test.cpp
 )
 target_link_libraries(ingestion_tests
     PRIVATE

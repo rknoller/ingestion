@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Project",
+            "type": "shell",
+            "command": "mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && cmake --build .",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Run Main App",
+            "type": "shell",
+            "command": "./build/ingestion_app",
+            "dependsOn": ["Build Project"],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run Tests",
+            "type": "shell",
+            "command": "./build/ingestion_tests",
+            "dependsOn": ["Build Project"]
+        },
+        {
+            "label": "Run Calculator Example",
+            "type": "shell",
+            "command": "./build/examples/calculator_example",
+            "dependsOn": ["Build Project"]
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+# Build artifacts
+/build/
+**/CMakeCache.txt
+**/CMakeFiles/
+**/cmake_install.cmake
+**/Makefile
+
+# Compiled objects & binaries
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+
+# Temporary & editor
+*.swp
+*.user
+.idea/
+
+# Allow VS Code configs (launch/tasks) to be tracked
+# .vscode/  <-- intentionally not ignored
+
+# Test data / temp
+/tmp/

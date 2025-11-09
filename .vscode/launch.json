@@ -75,7 +75,7 @@
             "id": "csvFile",
             "type": "promptString",
             "description": "Path to opinions CSV",
-            "default": "${workspaceFolder}/examples/sample.csv"
+            "default": "/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/opinions-2025-07-02.csv"
         }
     ]
 }

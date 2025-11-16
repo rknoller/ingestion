@@ -6,24 +6,107 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/ingestion_app",
-            "linux": {
-                "MIMode": "gdb",
-                "miDebuggerPath": "/usr/bin/gdb"
-            },
-            "args": ["${input:csvFile}"],
+            "args": [
+                "/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/opinions-2025-07-02.csv",
+                "--limit=100"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Disable debuginfod to avoid hangs",
+                    "text": "-gdb-set debuginfod enabled off",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": {
+                "engineLogging": false
+            }
+        },
+        {
+            "name": "Debug Main App (sample, no DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/ingestion_app",
+            "args": ["${workspaceFolder}/examples/sample.csv", "--no-db", "--limit=100"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
             ],
             "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Main App (sample, with DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/ingestion_app",
+            "args": ["${workspaceFolder}/examples/sample.csv", "--limit=100"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Main App (real file, no DB, 100 records)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/opinions-2025-07-02.csv", "--no-db", "--limit=100"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Main App (real file, with DB, 100 records)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/opinions-2025-07-02.csv", "--limit=100"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
@@ -67,15 +150,44 @@
             ],
             "preLaunchTask": "Build Project",
             "miDebuggerPath": "/usr/bin/gdb"
-        }
-    ]
-    ,
-    "inputs": [
+        },
         {
-            "id": "csvFile",
-            "type": "promptString",
-            "description": "Path to opinions CSV",
-            "default": "/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/opinions-2025-07-02.csv"
+            "name": "Debug Cluster Ingestion (no DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/cluster_ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/opinion-clusters-2025-07-02.csv", "--no-db", "--limit=100"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Cluster Ingestion (with DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/cluster_ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/opinion-clusters-2025-07-02.csv", "--limit=100"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }

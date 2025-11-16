@@ -5,6 +5,7 @@
 #include <map>
 #include <chrono>
 #include <optional>
+#include <fstream>
 
 class Opinion {
 public:
@@ -42,16 +43,30 @@ public:
     explicit OpinionReader(const std::string& filename);
     std::vector<Opinion> readOpinions(size_t max_lines = 100);
     
+    // Extract raw CSV records (multi-line aware, detects newline + comma + timestamp)
+    std::vector<std::string> extractRawRecords(size_t max_records = 100);
+
+    // Streaming API (similar to OpinionClusterReader)
+    void initStream();
+    bool readNextBatch(std::vector<std::string>& outRecords, size_t max_records = 1000, size_t chunk_bytes = 1024 * 1024);
+    bool eof() const { return eof_; }
+    
     // Public for testing
     Opinion parseCsvLine(const std::string& line);
     std::vector<std::string> splitCsvLine(const std::string& line);
+    void parseHeader(const std::string& header_line);
     
 private:
     std::string filename_;
     std::vector<std::string> header_;
     std::map<std::string, size_t> column_map_;
+
+    // Streaming state
+    bool streamed_initialized_ = false;
+    bool eof_ = false;
+    std::ifstream file_stream_;
+    std::string leftover_;
     
-    void parseHeader(const std::string& header_line);
     std::optional<std::string> getColumn(const std::vector<std::string>& cols, const std::string& name);
     bool isValidRow(const std::vector<std::string>& cols);
 };

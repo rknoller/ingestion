@@ -9,20 +9,53 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
+# Find PostgreSQL library
+find_package(PostgreSQL REQUIRED)
+find_library(PQXX_LIB pqxx REQUIRED)
+
 # Library target
 add_library(ingestion_lib
     src/opinion.cpp
+    src/opinion_db.cpp
 )
 target_include_directories(ingestion_lib 
     PUBLIC 
         ${CMAKE_SOURCE_DIR}/include
+        ${PostgreSQL_INCLUDE_DIRS}
+)
+target_link_libraries(ingestion_lib
+    PUBLIC
+        ${PQXX_LIB}
+        ${PostgreSQL_LIBRARIES}
 )
 
-# Main executable
+# Cluster library target
+add_library(cluster_lib
+    src/opinion_cluster.cpp
+    src/opinion_cluster_db.cpp
+)
+target_include_directories(cluster_lib 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/include
+        ${PostgreSQL_INCLUDE_DIRS}
+)
+target_link_libraries(cluster_lib
+    PUBLIC
+        ${PQXX_LIB}
+        ${PostgreSQL_LIBRARIES}
+)
+
+# Main executable (opinions)
 add_executable(ingestion_app
     src/main.cpp
 )
 target_link_libraries(ingestion_app PRIVATE ingestion_lib)
+
+# Cluster ingestion executable
+add_executable(cluster_ingestion_app
+    src/cluster_main.cpp
+)
+target_link_libraries(cluster_ingestion_app PRIVATE cluster_lib)
 
 # Enable testing
 enable_testing()

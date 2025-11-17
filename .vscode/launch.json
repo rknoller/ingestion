@@ -273,6 +273,70 @@
             "preLaunchTask": "Build Project",
             "logging": { "engineLogging": false },
             "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Joined By Ingestion (sample, no DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/joined_by_ingestion_app",
+            "args": ["${workspaceFolder}/examples/joined_by_sample.csv", "--no-db"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Joined By Ingestion (real file, no DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/joined_by_ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/search_opinion_joined_by-2025-07-02.csv", "--no-db"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Joined By Ingestion (real file, with DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/joined_by_ingestion_app",
+            "args": [
+                "/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/search_opinion_joined_by-2025-07-02.csv",
+                "--batch=5000",
+                "--bad-records=${workspaceFolder}/build/bad_joined_by_records.csv"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }

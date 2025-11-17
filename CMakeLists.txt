@@ -79,6 +79,28 @@ add_executable(panel_ingestion_app
 )
 target_link_libraries(panel_ingestion_app PRIVATE panel_lib)
 
+# Joined By library target
+add_library(joined_by_lib
+    src/opinion_joined_by.cpp
+    src/opinion_joined_by_db.cpp
+)
+target_include_directories(joined_by_lib 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/include
+        ${PostgreSQL_INCLUDE_DIRS}
+)
+target_link_libraries(joined_by_lib
+    PUBLIC
+        ${PQXX_LIB}
+        ${PostgreSQL_LIBRARIES}
+)
+
+# Joined By ingestion executable
+add_executable(joined_by_ingestion_app
+    src/joined_by_main.cpp
+)
+target_link_libraries(joined_by_ingestion_app PRIVATE joined_by_lib)
+
 # Enable testing
 enable_testing()
 

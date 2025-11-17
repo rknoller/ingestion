@@ -45,6 +45,22 @@ target_link_libraries(cluster_lib
         ${PostgreSQL_LIBRARIES}
 )
 
+# Panel library target
+add_library(panel_lib
+    src/opinion_cluster_panel.cpp
+    src/opinion_cluster_panel_db.cpp
+)
+target_include_directories(panel_lib 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/include
+        ${PostgreSQL_INCLUDE_DIRS}
+)
+target_link_libraries(panel_lib
+    PUBLIC
+        ${PQXX_LIB}
+        ${PostgreSQL_LIBRARIES}
+)
+
 # Main executable (opinions)
 add_executable(ingestion_app
     src/main.cpp
@@ -56,6 +72,12 @@ add_executable(cluster_ingestion_app
     src/cluster_main.cpp
 )
 target_link_libraries(cluster_ingestion_app PRIVATE cluster_lib)
+
+# Panel ingestion executable
+add_executable(panel_ingestion_app
+    src/panel_main.cpp
+)
+target_link_libraries(panel_ingestion_app PRIVATE panel_lib)
 
 # Enable testing
 enable_testing()

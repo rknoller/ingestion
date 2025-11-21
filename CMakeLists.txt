@@ -101,6 +101,72 @@ add_executable(joined_by_ingestion_app
 )
 target_link_libraries(joined_by_ingestion_app PRIVATE joined_by_lib)
 
+# Citation library target
+add_library(citation_lib
+    src/opinion_cited.cpp
+    src/opinion_cited_db.cpp
+)
+target_include_directories(citation_lib 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/include
+        ${PostgreSQL_INCLUDE_DIRS}
+)
+target_link_libraries(citation_lib
+    PUBLIC
+        ${PQXX_LIB}
+        ${PostgreSQL_LIBRARIES}
+)
+
+# Citation ingestion executable
+add_executable(citation_ingestion_app
+    src/citation_main.cpp
+)
+target_link_libraries(citation_ingestion_app PRIVATE citation_lib)
+
+# Search Citation library target
+add_library(search_citation_lib
+    src/search_citation.cpp
+    src/search_citation_db.cpp
+)
+target_include_directories(search_citation_lib 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/include
+        ${PostgreSQL_INCLUDE_DIRS}
+)
+target_link_libraries(search_citation_lib
+    PUBLIC
+        ${PQXX_LIB}
+        ${PostgreSQL_LIBRARIES}
+)
+
+# Search Citation ingestion executable
+add_executable(search_citation_ingestion_app
+    src/search_citation_main.cpp
+)
+target_link_libraries(search_citation_ingestion_app PRIVATE search_citation_lib)
+
+# Parenthetical library target
+add_library(parenthetical_lib
+    src/parenthetical.cpp
+    src/parenthetical_db.cpp
+)
+target_include_directories(parenthetical_lib 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/include
+        ${PostgreSQL_INCLUDE_DIRS}
+)
+target_link_libraries(parenthetical_lib
+    PUBLIC
+        ${PQXX_LIB}
+        ${PostgreSQL_LIBRARIES}
+)
+
+# Parenthetical ingestion executable
+add_executable(parenthetical_ingestion_app
+    src/parenthetical_main.cpp
+)
+target_link_libraries(parenthetical_ingestion_app PRIVATE parenthetical_lib)
+
 # Enable testing
 enable_testing()
 

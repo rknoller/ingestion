@@ -337,6 +337,138 @@
             "preLaunchTask": "Build Project",
             "logging": { "engineLogging": false },
             "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Citation Ingestion (no DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/citation_ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/citation-map-2025-07-02.csv", "--no-db", "--batch=1000"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Citation Ingestion (with DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/citation_ingestion_app",
+            "args": [
+                "/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/citation-map-2025-07-02.csv",
+                "--batch=5000",
+                "--bad-records=${workspaceFolder}/build/bad_citation_records.csv"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Search Citation Ingestion (no DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/search_citation_ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/citations-2025-07-02.csv", "--no-db"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Search Citation Ingestion (with DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/search_citation_ingestion_app",
+            "args": [
+                "/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/citations-2025-07-02.csv",
+                "--batch=5000",
+                "--bad-records=${workspaceFolder}/build/bad_search_citation_records.csv"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Parenthetical Ingestion (no DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/parenthetical_ingestion_app",
+            "args": ["/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/parentheticals-2025-07-02.csv", "--no-db"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Parenthetical Ingestion (with DB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/parenthetical_ingestion_app",
+            "args": [
+                "/media/knoller/Expansion/Data/courtlistener/bulk-2025-07-02/parentheticals-2025-07-02.csv",
+                "--batch=5000",
+                "--bad-records=${workspaceFolder}/build/bad_parenthetical_records.csv"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                { "description": "Enable pretty-printing for gdb", "text": "-enable-pretty-printing", "ignoreFailures": true },
+                { "description": "Set unlimited string print length", "text": "-gdb-set print elements 0", "ignoreFailures": true },
+                { "description": "Disable debuginfod to avoid hangs", "text": "-gdb-set debuginfod enabled off", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "Build Project",
+            "logging": { "engineLogging": false },
+            "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }
